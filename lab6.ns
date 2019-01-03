@@ -1,0 +1,17 @@
+set ns [new Simulator]
+source tb_compat.tcl
+
+set nodeA [$ns node]
+set nodeB [$ns node]
+
+set link1 [$ns duplex-link $nodeB $nodeA 100Mb 100ms DropTail]
+tb-set-link-loss $link1 0.20
+
+#Set the OS 
+tb-set-node-os $nodeA Ubuntu1404-32-STD
+tb-set-node-os $nodeB Ubuntu1404-32-STD
+
+$ns rtproto Static
+
+#Go! 
+$ns run
